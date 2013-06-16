@@ -18,7 +18,7 @@ class JamsControllerTest < ActionController::TestCase
 
   test "should create jam" do
     assert_difference('Jam.count') do
-      post :create, jam: { url: @jam.url }
+      post :create, jam: {  }
     end
 
     assert_redirected_to jam_path(assigns(:jam))
@@ -35,7 +35,7 @@ class JamsControllerTest < ActionController::TestCase
   end
 
   test "should update jam" do
-    put :update, id: @jam, jam: { url: @jam.url }
+    put :update, id: @jam, jam: {  }
     assert_redirected_to jam_path(assigns(:jam))
   end
 

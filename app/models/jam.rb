@@ -1,3 +1,3 @@
 class Jam < ActiveRecord::Base
-  attr_accessible :url
+  # attr_accessible :title, :body
 end
