@@ -1,1 +1,5 @@
-<%= @friends %>
+<ul>
+<% @feed.each do |post| %>
+	<li><%= post['from']['name'] %></li>
+<% end %>
+</ul>
