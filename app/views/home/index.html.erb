@@ -1,7 +1,7 @@
 <% @feed.each do |post| %>
 	<div class='post row-fluid'>
 		<div class='span8 offset2'>
-			<img src=<%= post['picture'] %> class="img-circle">
+			<img src=<%= post['picture'] %> class="img-rounded">
 			<p class='name'><%= post['name'] %></p>
 			<p hidden class='source'><%= post['source'] %></p>
 		</div>
