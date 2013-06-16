@@ -1,5 +1,9 @@
-<ul>
 <% @feed.each do |post| %>
-	<li><%= post['from']['name'] %></li>
+	<% if !post['source'].nil? %>
+		<div class="row">
+			<div class='span8 offset2'>
+				<embed width="100%" height="500px" src="<%= post['source'] %>"> </embed>
+			</div>
+		</div></br>
+	<% end %>
 <% end %>
-</ul>
