@@ -1,8 +1,8 @@
-<% @feed.each do |post| %>
-	<div class="row">
-		<div class='span8 offset2'>
+<div class="row">
+	<div class='span8 offset2'>
+		<% @feed.each do |post| %>
 			<embed width="100%" height="500px" src="<%= post['source'] %>"> </embed>
-		</div>
+			</br>
+		<% end %>
 	</div>
-	</br>
-<% end %>
+</div>

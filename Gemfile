@@ -8,6 +8,7 @@ end
 
 gem 'pg'
 gem 'koala'
+gem 'newrelic_rpm'
 
 
 # Gems used only for assets and not required
