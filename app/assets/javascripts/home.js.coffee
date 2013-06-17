@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+	$('.post').mouseover ->
+		$(this).css( 'cursor', 'pointer' )
 	$('.post').click -> 
 		source = $(this).find('.source').text()
 		$('#playa').attr('src', source)

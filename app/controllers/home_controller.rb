@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-  	@graph = Koala::Facebook::API.new('CAACEdEose0cBALpEjpo94OQ9ENFCEU8ZChlSJzeEpZCylxLuR5vLLEEBZB5Df1wVDQxsCZBe95jHFYYglU1J1ZCiVnA3j7oQ5kdt34CdI73SeGLSlSklcQokZAfZAl6IaoRSfb6bZBX9mZC487Ju7DChlpgEjlIKPRDPu4V48LuWWqgZDZD')
+  	@graph = Koala::Facebook::API.new('CAACEdEose0cBAPwj0qTlnzPll0ys2xTUkgMnvrqPzkm5AkzeaoKlj0UYgVy261oIHzi9SCbZBo170RAF9DCS62pIruxBngNKZBLhpZAMwfCuRfOBvgwbw5ZC7dIJnHKpsL20lrZAz1DlhfHg6bm641jNi8jN7ajjlQvGejBlO6QZDZD')
   	fb_feed = @graph.get_connections("232990736786590", "feed", { :limit => 20} )
   	@feed = []
   	fb_feed.each do |post|
