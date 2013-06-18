@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $ ->
 	
 	# Singular Jam
@@ -37,8 +33,8 @@ $ ->
 	JamView = Backbone.View.extend({
 		tagName : "div"
 		render : ->
-			$(this.el).append("<div>" + this.model.get('type') + "</div>")
-			$(this.el).append("<div>" + this.model.get('from').name + "</div>")
+			$(this.el).append("<div>" + @.model.get('type') + "</div>")
+			$(this.el).append("<div>" + @.model.get('from').name + "</div>")
 	})
 
 
