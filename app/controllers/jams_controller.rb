@@ -17,7 +17,7 @@ class JamsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @jam }
+      format.json { render json: @jam.to_json(:include => :user, :except => :user_id ) }
     end
   end
 

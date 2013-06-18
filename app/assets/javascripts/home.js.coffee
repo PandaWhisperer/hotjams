@@ -59,8 +59,8 @@ $ ->
 
 # 	# Random Jquery shit
 
-# 	$('.post').hover ->
-# 		$(this).css( 'cursor', 'pointer' )
-# 	$('.post').click -> 
-# 		source = $(this).find('.source').text()
-# 		$('#playa').attr('src', source)
+	$('.post').hover ->
+		$(this).css( 'cursor', 'pointer' )
+	$('.post').click -> 
+		source = $(this).find('.source').text()
+		$('#playa').attr('src', source)
