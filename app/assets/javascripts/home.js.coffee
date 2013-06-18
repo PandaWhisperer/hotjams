@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+	Post = Backbone.Model.extend({})
 	$('.post').hover ->
 		$(this).css( 'cursor', 'pointer' )
 	$('.post').click -> 
