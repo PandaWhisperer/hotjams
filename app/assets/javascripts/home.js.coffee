@@ -4,17 +4,8 @@ $ ->
 
 	Jam = Backbone.Model.extend({
 		url : ->
-			return '/jams/' + 27 + '.json'
+			return '/jams/' + @get('id') + '.json'
 	})
-
-	jam = new Jam()
-
-	jam.fetch({
-		success : ->
-			view = new JamView({ model : jam })
-			$('#app').append( view.render() )
-	})
-
 	
 	# Jam Collection
 
@@ -27,16 +18,30 @@ $ ->
 
 	jams.fetch({
 		success : ->
-			console.log(jams)
+			jams_view  = new JamsView({})
+			_.each(jams.models, (model) ->
+				jams_view.addOne(model)
+			)
+	})
+
+
+	# Jams Collection View
+
+	JamsView = Backbone.View.extend({
+		el : '.post'
+		addOne : (model) ->
+			view = new JamView({ model : model })
+			$('#app').append(view.render())
 	})
 
 	# Jam View Object
 
 	JamView = Backbone.View.extend({
-		tagName : "div"
+		tagName : "div",
 		render : ->
-			$(this.el).append("<div>" + @.model.get('type') + "</div>")
-			$(this.el).append("<div>" + @.model.get('from').name + "</div>")
+			$(this.el).append("<div>" + @.model.get('name') + "</div>")
+			$(this.el).append("<div>" + @.model.get('user').name + "</div>")
+			$(this.el).append("</br>")
 	})
 
 
@@ -53,20 +58,16 @@ $ ->
 # </div>
 
 
-# # <div class='span0'>
-# # 	<iframe id="playa" src="<%= @feed['source'] %>" width="100%" height="500px" hidden> </iframe>
-# # 	</br>
-# # </div>
-
-
-
-	# Popcorn bitch
-	pop = Popcorn.smart( "#player", "http://www.youtube.com/watch?v=Lw3W4TGZ5oY" );
+# <div class='span0'>
+# 	<iframe id="playa" src="<%= @feed['source'] %>" width="100%" height="500px" hidden> </iframe>
+# 	</br>
+# </div>
 
  	# Random Jquery shit
 
 	$('.post').hover ->
 		$(this).css( 'cursor', 'pointer' )
-	$('.post').click -> 
-		source = $(this).find('.source').text()
-		$('#playa').attr('src', source)
+	# $('.post').click -> 
+	# 	source = $(this).find('.source').text()
+	# 	$('#playa').attr('src', source)
+

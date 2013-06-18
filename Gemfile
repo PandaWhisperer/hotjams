@@ -10,7 +10,6 @@ gem 'pg'
 gem 'koala'
 gem 'newrelic_rpm'
 gem 'rails-backbone'
-gem 'popcornjs-rails'
 
 
 # Gems used only for assets and not required
