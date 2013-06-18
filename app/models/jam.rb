@@ -1,6 +1,7 @@
 class Jam < ActiveRecord::Base
   attr_accessible :name, :source, :picture, :user
   belongs_to :user
+  validates_uniqueness_of :source, :on => :create, :message => "must be unique"
 
 
   def self.fetchAllFromFB
@@ -12,5 +13,5 @@ class Jam < ActiveRecord::Base
     end
     jams
   end
-  
+
 end
