@@ -7,6 +7,6 @@ class Jam < ActiveRecord::Base
     fb_feed.each do |post|
       jams << post unless ( post.nil? || post['source'].nil? )
     end
-    jams
+    jams[0]
   end
 end
