@@ -3,11 +3,10 @@ class JamsController < ApplicationController
   # GET /jams.json
   def index
     @jams = Jam.all
-    # @jams = Jam.fetchAllFromFB
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @jams }
+      format.json { render json: @jams.to_json(:include => :user, :except => :user_id ) }
     end
   end
 
