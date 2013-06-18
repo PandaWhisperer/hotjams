@@ -18,5 +18,4 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/hotjams
-//= require popcorn-complete
 //= require_tree .

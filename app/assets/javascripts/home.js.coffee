@@ -4,7 +4,7 @@ $ ->
 
 	Jam = Backbone.Model.extend({
 		url : ->
-			return '/jams/' + @get('id') + '.json'
+			return '/jams/' + @.get('id') + '.json'
 	})
 	
 	# Jam Collection
@@ -65,9 +65,7 @@ $ ->
 
  	# Random Jquery shit
 
-	$('.post').hover ->
-		$(this).css( 'cursor', 'pointer' )
-	# $('.post').click -> 
-	# 	source = $(this).find('.source').text()
-	# 	$('#playa').attr('src', source)
+	$('.post').click -> 
+		source = $(this).find('.source').text()
+		$('#playa').attr('src', source)
 
