@@ -71,6 +71,7 @@ GEM
     newrelic_rpm (3.6.3.111)
     pg (0.15.1)
     polyglot (0.3.3)
+    popcornjs-rails (1.2.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -135,6 +136,7 @@ DEPENDENCIES
   less-rails
   newrelic_rpm
   pg
+  popcornjs-rails
   rails (= 3.2.13)
   rails-backbone
   sqlite3

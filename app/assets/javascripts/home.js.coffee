@@ -2,16 +2,18 @@ $ ->
 	
 	# Singular Jam
 
-	Jam = Backbone.Model.extend({})
+	Jam = Backbone.Model.extend({
+		url : ->
+			return '/jams/' + 27 + '.json'
+	})
 
-	# jam = new Jam()
-	# jam.url = '/jams.json'
+	jam = new Jam()
 
-	# jam.fetch({
-	# 	success : ->
-	# 		view = new JamView({ model : jam })
-	# 		$('#app').append( view.render() )
-	# })
+	jam.fetch({
+		success : ->
+			view = new JamView({ model : jam })
+			$('#app').append( view.render() )
+	})
 
 	
 	# Jam Collection
@@ -21,7 +23,7 @@ $ ->
 	})
 
 	jams = new Jams()
-	jams.url = '/jams/26.json'
+	jams.url = '/jams.json'
 
 	jams.fetch({
 		success : ->
@@ -57,7 +59,11 @@ $ ->
 # # </div>
 
 
-# 	# Random Jquery shit
+
+	# Popcorn bitch
+	pop = Popcorn.smart( "#player", "http://www.youtube.com/watch?v=Lw3W4TGZ5oY" );
+
+ 	# Random Jquery shit
 
 	$('.post').hover ->
 		$(this).css( 'cursor', 'pointer' )
