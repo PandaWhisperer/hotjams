@@ -1,9 +1,8 @@
 hotjams
 =======
 
-Learn Backbone
+Make use of handlebars templating for jams in the list view
 
-Usebackbone models (maybe with angular, maybe just all backbone)
+Add back the hidden player
 
-Implement Popcorn JS 
-	popcorn = Popcorn( "#playa",  array_of_jam_sources )
+Add continuous playback
