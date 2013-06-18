@@ -4,6 +4,14 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @jam.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:source) %>:</strong></dt>
+  <dd><%= @jam.source %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:picture) %>:</strong></dt>
+  <dd><%= @jam.picture %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @jam.user_id %></dd>
 </dl>
 
 <div class="form-actions">
