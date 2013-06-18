@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-  	@feed = Jam.fetchAllFromFB
+  	@feed = Jam.order(:created_at)
   end
 end

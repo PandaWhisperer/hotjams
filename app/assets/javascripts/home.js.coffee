@@ -4,29 +4,29 @@ $ ->
 
 	Jam = Backbone.Model.extend({})
 
-	jam = new Jam()
-	jam.url = '/jams.json'
+	# jam = new Jam()
+	# jam.url = '/jams.json'
 
-	jam.fetch({
-		success : ->
-			view = new JamView({ model : jam })
-			$('#app').append( view.render() )
-	})
+	# jam.fetch({
+	# 	success : ->
+	# 		view = new JamView({ model : jam })
+	# 		$('#app').append( view.render() )
+	# })
 
 	
 	# Jam Collection
 
-	# Jams = Backbone.Collection.extend({
-	# 	model : Jam
-	# })
+	Jams = Backbone.Collection.extend({
+		model : Jam
+	})
 
-	# jams = new Jams()
-	# jams.url = '/jams.json'
+	jams = new Jams()
+	jams.url = '/jams/26.json'
 
-	# jams.fetch({
-	# 	success : ->
-	# 		console.log(jams)
-	# })
+	jams.fetch({
+		success : ->
+			console.log(jams)
+	})
 
 	# Jam View Object
 
