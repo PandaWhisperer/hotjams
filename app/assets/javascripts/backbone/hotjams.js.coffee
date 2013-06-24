@@ -49,7 +49,6 @@ JamsView = Backbone.View.extend({
 	addOne : (jam) ->
 		view = new JamView({ model : jam })
 		this.$el.append( view.render().el )
-		this.$el.append('<br/>')
 })
 
 
