@@ -10,21 +10,43 @@ window.Hotjams =
   Routers: {}
   Views: {}
 
-# Singular Jam
+_.templateSettings = {
+  interpolate : /\{\{(.+?)\}\}/g
+};
 
+# Singular Jam
 Jam = Backbone.Model.extend({
 	url : ->
 		return '/jams/' + @.get('id') + '.json'
 })
 
-# Jam Collection
-
-Jams = Backbone.Collection.extend({
-	model : Jam
+# Jam View Object
+JamView = Backbone.View.extend({
+	tagName : "div",
+	className: 'row-fluid',
+	template: _.template( $("#jam-template").html() )
+	render : ->
+		this.$el.html( this.template( this.model.toJSON() ) )
+		this
 })
 
+# Jam Collection
+Jams = Backbone.Collection.extend({
+	model : Jam,
+	url : '/jams.json'
+})
+
+# Jams Collection View
+JamsView = Backbone.View.extend({
+	el : '#app',
+	addOne : (jam) ->
+		view = new JamView({ model : jam })
+		this.$el.append( view.render().el )
+		this.$el.append('<br/>')
+})
+
+
 jams = new Jams()
-jams.url = '/jams.json'
 
 jams.fetch({
 	success : ->
@@ -35,21 +57,4 @@ jams.fetch({
 })
 
 
-# Jams Collection View
 
-JamsView = Backbone.View.extend({
-	el : '.post'
-	addOne : (model) ->
-		view = new JamView({ model : model })
-		$('#app').append(view.render())
-})
-
-# Jam View Object
-
-JamView = Backbone.View.extend({
-	tagName : "div",
-	render : ->
-		$(this.el).append("<div>" + @.model.get('name') + "</div>")
-		$(this.el).append("<div>" + @.model.get('user').name + "</div>")
-		$(this.el).append("</br>")
-})
