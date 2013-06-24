@@ -24,10 +24,17 @@ Jam = Backbone.Model.extend({
 JamView = Backbone.View.extend({
 	tagName : "div",
 	className: 'row-fluid',
-	template: _.template( $("#jam-template").html() )
+	template: _.template( $("#jam-template").html() ),
+	events: {
+		'click .post': 'playJam'
+	}
+	
 	render : ->
-		this.$el.html( this.template( this.model.toJSON() ) )
+		this.$el.html( this.template( this.model.attributes ) )
 		this
+	
+	playJam: ->
+		$('#playa').attr( 'src', this.model.attributes.source )
 })
 
 # Jam Collection
