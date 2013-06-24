@@ -22,3 +22,6 @@ $ ->
 		source = $(this).find('.source').text()
 		$('#playa').attr('src', source)
 
+	$("video").bind("ended", ->
+   		alert("I'm done!");
+	)
