@@ -14,53 +14,78 @@ _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 };
 
-# Singular Jam
-Jam = Backbone.Model.extend({
-	url : ->
-		return '/jams/' + @.get('id') + '.json'
-})
+player = {}
 
-# Jam View Object
-JamView = Backbone.View.extend({
-	tagName : "div",
-	className: 'row-fluid',
-	template: _.template( $("#jam-template").html() ),
-	events: {
-		'click .post': 'playJam'
-	}
+$ -> 
+
+	# Singular Jam
+	Jam = Backbone.Model.extend({
+		url : ->
+			return '/jams/' + @.get('id') + '.json'
+	})
+
+	# Jam View Object
+	JamView = Backbone.View.extend({
+		tagName : "div",
+		className: 'row-fluid',
+		template: _.template( $("#jam-template").html() ),
+		events: {
+			'click .post': 'playJam'
+		}
+		
+		render : ->
+			this.$el.html( this.template( this.model.attributes ) )
+			this
+		
+		playJam: ->
+			player.destroy()
+			player = Popcorn.smart( "#playa", this.model.attributes.source )
+			player.on( 'canplaythrough', ->
+				player.pause()
+				player.play()
+			)
+	})
+
+	# Jam Collection
+	Jams = Backbone.Collection.extend({
+		model : Jam,
+		url : '/jams.json'
+	})
+
+	# Jams Collection View
+	JamsView = Backbone.View.extend({
+		el : '#app',
+		addOne : (jam) ->
+			view = new JamView({ model : jam })
+			this.$el.append( view.render().el )
+	})
+
+
+	jams = new Jams()
+
+	jams.fetch({
+		success : ->
+			jams_view  = new JamsView({})
+			player = Popcorn.smart( "#playa", jams.models[0].attributes.source )
+			player.on( 'canplaythrough', ->
+				player.pause()
+				player.play()
+			)
+			
+			_.each(jams.models, (model) ->
+				jams_view.addOne(model)
+			)
+	})
+
 	
-	render : ->
-		this.$el.html( this.template( this.model.attributes ) )
-		this
-	
-	playJam: ->
-		$('#playa').attr( 'src', this.model.attributes.source )
-})
-
-# Jam Collection
-Jams = Backbone.Collection.extend({
-	model : Jam,
-	url : '/jams.json'
-})
-
-# Jams Collection View
-JamsView = Backbone.View.extend({
-	el : '#app',
-	addOne : (jam) ->
-		view = new JamView({ model : jam })
-		this.$el.append( view.render().el )
-})
-
-
-jams = new Jams()
-
-jams.fetch({
-	success : ->
-		jams_view  = new JamsView({})
-		_.each(jams.models, (model) ->
-			jams_view.addOne(model)
-		)
-})
 
 
 
+	# pop.on('ended', ->
+	# 	pop.destroy()
+	# 	next = Popcorn.smart( "#playa", "http://soundcloud.com/evil_concussion/2013-03-09-atoms-for-peace-aka" )
+	# 	next.on( 'canplaythrough', ->
+	# 			next.pause()
+	# 			next.play()
+	# 	)
+	# )
