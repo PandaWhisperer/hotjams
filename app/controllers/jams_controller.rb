@@ -2,7 +2,7 @@ class JamsController < ApplicationController
   # GET /jams
   # GET /jams.json
   def index
-    @jams = Jam.order('created_at')
+    @jams = Jam.order('created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb

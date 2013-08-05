@@ -38,8 +38,8 @@ $ ->
 			this
 		
 		playJam: ->
-			player.destroy()
-			player = Popcorn.smart( "#playa", this.model.attributes.source )
+			$($('#playa').children()[0]).attr('src',this.model.attributes.source);
+			player.load()
 			player.on( 'canplaythrough', ->
 				player.pause()
 				player.play()
@@ -66,14 +66,24 @@ $ ->
 	jams.fetch({
 		success : ->
 			jams_view  = new JamsView({})
-			player = Popcorn.smart( "#playa", jams.models[0].attributes.source )
+			
+			_.each(jams.models, (model) ->
+				jams_view.addOne(model)
+			)
+
+			player = Popcorn.smart( "#playa", jams.models.shift().attributes.source )
 			player.on( 'canplaythrough', ->
 				player.pause()
 				player.play()
 			)
 			
-			_.each(jams.models, (model) ->
-				jams_view.addOne(model)
+			player.on( 'ended', ->
+				$($('#playa').children()[0]).attr('src',jams.models.shift().attributes.source);
+				player.load()
+				player.on( 'canplaythrough', ->
+					player.pause()
+					player.play()
+				)
 			)
 	})
 
