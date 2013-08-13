@@ -14,7 +14,7 @@ _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 };
 
-player = {}
+window.player = {}
 
 $ -> 
 
@@ -39,10 +39,10 @@ $ ->
 		
 		playJam: ->
 			$($('#playa').children()[0]).attr('src',this.model.attributes.source);
-			player.load()
-			player.on( 'canplaythrough', ->
-				player.pause()
-				player.play()
+			window.player.load()
+			window.player.on( 'canplaythrough', ->
+				window.player.pause()
+				window.player.play()
 			)
 	})
 
@@ -71,18 +71,18 @@ $ ->
 				jams_view.addOne(model)
 			)
 
-			player = Popcorn.smart( "#playa", jams.models.shift().attributes.source )
-			player.on( 'canplaythrough', ->
-				player.pause()
-				player.play()
+			window.player = Popcorn.smart( "#playa", jams.models.shift().attributes.source )
+			window.player.on( 'canplaythrough', ->
+				window.player.pause()
+				window.player.play()
 			)
 			
-			player.on( 'ended', ->
+			window.player.on( 'ended', ->
 				$($('#playa').children()[0]).attr('src',jams.models.shift().attributes.source);
-				player.load()
-				player.on( 'canplaythrough', ->
-					player.pause()
-					player.play()
+				window.player.load()
+				window.player.on( 'canplaythrough', ->
+					window.player.pause()
+					window.player.play()
 				)
 			)
 	})
