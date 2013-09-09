@@ -61,24 +61,24 @@ $ ->
 	})
 
 
-	jams = new Jams()
+	window.jams = new Jams()
 
-	jams.fetch({
+	window.jams.fetch({
 		success : ->
 			jams_view  = new JamsView({})
 			
-			_.each(jams.models, (model) ->
+			_.each(window.jams.models, (model) ->
 				jams_view.addOne(model)
 			)
 
-			window.player = Popcorn.smart( "#playa", jams.models.shift().attributes.source )
+			window.player = Popcorn.smart( "#playa", window.jams.models.shift().attributes.source )
 			window.player.on( 'canplaythrough', ->
 				window.player.pause()
 				window.player.play()
 			)
 			
 			window.player.on( 'ended', ->
-				$($('#playa').children()[0]).attr('src',jams.models.shift().attributes.source);
+				$($('#playa').children()[0]).attr('src',window.jams.models.shift().attributes.source);
 				window.player.load()
 				window.player.on( 'canplaythrough', ->
 					window.player.pause()
