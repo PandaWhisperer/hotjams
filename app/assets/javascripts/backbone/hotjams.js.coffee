@@ -78,8 +78,7 @@ $ ->
 			)
 			
 			window.player.on( 'ended', ->
-				$($('#playa').children()[0]).attr('src',window.jams.models.shift().attributes.source);
-				window.player.load()
+				window.player = Popcorn.smart( "#playa", window.jams.models.shift().attributes.source )
 				window.player.on( 'canplaythrough', ->
 					window.player.pause()
 					window.player.play()
