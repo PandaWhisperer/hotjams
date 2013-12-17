@@ -84,9 +84,8 @@ $ ->
 	createNew = () ->
 		next_song = window.jams.models.shift().attributes.source
 		if  next_song
-			child = $("#playa").first().first()
-			console.log(child)
-				# child.remove()
+			child = $("#playa").children().first()
+			child.remove()
 			window.player = Popcorn.smart( "#playa", next_song )
 			window.player.on( 'canplaythrough', canPlayThrough )
 			window.player.on( 'ended', createNew )
