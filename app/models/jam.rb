@@ -5,7 +5,7 @@ class Jam < ActiveRecord::Base
 
 
   def self.fetchAllFromFB
-    graph = Koala::Facebook::API.new('CAACEdEose0cBAKVDQyfl0Vq05TjrLY7SQcv4nEnNywoF2X7ZC1jJ8oXnr1XxEPw2J4aDd9uOfHygwXucShRsdtIMoaBw5CnAcPJoY5LeH8mZCbBWRV9zhyivLt6tX0OXeyfrXOahimE94JHjaCSv0Aq7mePn8GNF2hzLyvXZCXzoWMx5ivqSQFbYG8BZCdQZD')
+    graph = Koala::Facebook::API.new('CAACEdEose0cBABG5TkvYkmdXLJbZBNb4M3xTukxB5uzZCJKEqXnZCojyZCYEAjtTKOodLiZBpFVtpiV59i7sRFuMxgM0neZBpfuE5t83dWn50y46MsKWZByZAtumAyj9ZCBUoGHHzvRY37SK6ckBaMJsRmA5su6hQirUiOjzOn9nMHdLzBRNapZBkON5EWYFSIGWkZD')
     fb_feed = graph.get_connections("232990736786590", "feed", { :limit => 2000} )
     jams = []
     fb_feed.each do |post|
