@@ -92,9 +92,7 @@ $ ->
 			window.player.on( 'ended', () -> spawnAndPlay( song_index + 1 ) )
 			
 	killMediaPlayer = () ->
-		# Remove the old player
-		child = $("#playa").children().first()
-		child.remove()
+		$("#playa").children().first().remove()
 
 	spawnPlayer = (song_source) ->
 		window.player = Popcorn.smart( "#playa", song_source )
