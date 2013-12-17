@@ -38,12 +38,8 @@ $ ->
 			this
 		
 		playJam: ->
-			$($('#playa').children()[0]).attr('src',this.model.attributes.source);
-			window.player.load()
-			window.player.on( 'canplaythrough', ->
-				window.player.pause()
-				window.player.play()
-			)
+			spawnAndPlay( this.$el.index() )
+			
 	})
 
 	# Jam Collection
@@ -71,34 +67,38 @@ $ ->
 				jams_view.addOne(model)
 			)
 
-			createNew()
+			spawnAndPlay(0)
 	})
 
 
 
+	# # # # # # # #  Helper Functions # # # # # # # #
+
+	spawnAndPlay = (song_index) ->
+		# Check for valid song index
+		if song_index >= 0 && song_index < window.jams.models.length
 			
-	canPlayThrough = () ->
-		window.player.pause()
+			# Kill the current media player node
+			killMediaPlayer()
+			
+			# Create a new media player node with the new song
+			song = window.jams.models[song_index]
+			spawnPlayer(song.attributes.source)
+			
+			# Play the song when ready
+			window.player.on( 'canplaythrough', playMedia )
+
+			# Queue up the next song
+			window.player.on( 'ended', () -> spawnAndPlay( song_index + 1 ) )
+			
+	killMediaPlayer = () ->
+		# Remove the old player
+		child = $("#playa").children().first()
+		child.remove()
+
+	spawnPlayer = (song_source) ->
+		window.player = Popcorn.smart( "#playa", song_source )
+
+	playMedia = () ->
 		window.player.play()
 
-	createNew = () ->
-		next_song = window.jams.models.shift().attributes.source
-		if  next_song
-			child = $("#playa").children().first()
-			child.remove()
-			window.player = Popcorn.smart( "#playa", next_song )
-			window.player.on( 'canplaythrough', canPlayThrough )
-			window.player.on( 'ended', createNew )
-
-		
-
-
-
-	# pop.on('ended', ->
-	# 	pop.destroy()
-	# 	next = Popcorn.smart( "#playa", "http://soundcloud.com/evil_concussion/2013-03-09-atoms-for-peace-aka" )
-	# 	next.on( 'canplaythrough', ->
-	# 			next.pause()
-	# 			next.play()
-	# 	)
-	# )
