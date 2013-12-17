@@ -71,22 +71,27 @@ $ ->
 				jams_view.addOne(model)
 			)
 
-			window.player = Popcorn.smart( "#playa", window.jams.models.shift().attributes.source )
-			window.player.on( 'canplaythrough', ->
-				window.player.pause()
-				window.player.play()
-			)
-			
-			window.player.on( 'ended', ->
-				window.player = Popcorn.smart( "#playa", window.jams.models.shift().attributes.source )
-				window.player.on( 'canplaythrough', ->
-					window.player.pause()
-					window.player.play()
-				)
-			)
+			createNew()
 	})
 
-	
+
+
+			
+	canPlayThrough = () ->
+		window.player.pause()
+		window.player.play()
+
+	createNew = () ->
+		next_song = window.jams.models.shift().attributes.source
+		if  next_song
+			child = $("#playa").first().first()
+			console.log(child)
+				# child.remove()
+			window.player = Popcorn.smart( "#playa", next_song )
+			window.player.on( 'canplaythrough', canPlayThrough )
+			window.player.on( 'ended', createNew )
+
+		
 
 
 
