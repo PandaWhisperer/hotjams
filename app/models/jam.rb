@@ -5,13 +5,19 @@ class Jam < ActiveRecord::Base
 
 
   def self.fetchAllFromFB
-    graph = Koala::Facebook::API.new('CAACEdEose0cBABG5TkvYkmdXLJbZBNb4M3xTukxB5uzZCJKEqXnZCojyZCYEAjtTKOodLiZBpFVtpiV59i7sRFuMxgM0neZBpfuE5t83dWn50y46MsKWZByZAtumAyj9ZCBUoGHHzvRY37SK6ckBaMJsRmA5su6hQirUiOjzOn9nMHdLzBRNapZBkON5EWYFSIGWkZD')
-    fb_feed = graph.get_connections("232990736786590", "feed", { :limit => 200} )
-    jams = []
+    hotjams_page_id = "232990736786590";
+    user = User.order("updated_at").last
+    access_token = user.auth_token
+
+    graph = Koala::Facebook::API.new(access_token)
+    
+    fb_feed = graph.get_connections(hotjams_page_id, "feed", { :limit => 200} )
+    
+    jams = [] 
     fb_feed.each do |post|
       jams << post unless ( post.nil? || post['source'].nil? )
     end
-    jams
+    
   end
 
 end
