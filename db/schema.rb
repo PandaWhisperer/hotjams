@@ -11,23 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140311060628) do
+ActiveRecord::Schema.define(:version => 20140313065825) do
 
   create_table "jams", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
-    t.string   "source"
-    t.string   "picture"
+    t.text     "source"
+    t.text     "picture"
     t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.string   "name"
-    t.string   "auth_token"
-    t.integer  "fb_id"
+    t.text     "auth_token"
+    t.integer  "fb_id",      :limit => 8
   end
 
 end
