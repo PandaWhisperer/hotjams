@@ -7,7 +7,11 @@ class Jam < ActiveRecord::Base
   def self.fetchAllFromFB
     hotjams_page_id = "232990736786590";
     user = User.where("auth_token IS NOT NULL").order("updated_at").last
-    access_token = user.auth_token
+    if user.nil?
+      access_token = "CAACEdEose0cBAFDNrNF6VHPOJjXOVr9o0k3bTZBPFD1kTmO6RmuD9RTGDs5xXtcAZCSDGq3lk19ZBHsHmuaZC8sgObZBMq2N52t9T44CZAUcxIQbJdSiXjuwQ51SV3G1aKQCg6wWt29a2ZBkEHZBVXVY6X9LrBFrrixqZCZBsLxPXppLlaRM8dgpODuVZBFqzCE8wYZD"
+    else 
+      access_token = user.auth_token
+    end
 
     graph = Koala::Facebook::API.new(access_token)
     
